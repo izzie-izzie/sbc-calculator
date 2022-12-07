@@ -1,0 +1,22 @@
+function calculateProfit() {
+  // Get the buy price and sell price from the user
+  var buy_price = document.getElementById('buy_price').value;
+  var sell_price = document.getElementById('sell_price').value;
+  var number_to_keep = document.getElementById('number_to_keep').value;
+
+  // Calculate the profit per gold common
+  var profit_per_common = sell_price - buy_price;
+
+  var total_keep_price = number_to_keep * buy_price;
+  var total_sell_price = 0;
+
+  while (total_sell_price < total_keep_price) {
+    total_sell_price += profit_per_common;
+  }
+
+  var number_to_sell = total_sell_price / profit_per_common;
+
+  // Print the result
+  var result = "Profit per card: " + parseInt(profit_per_common) + "<br><br>Total sell price: " + parseInt(total_sell_price) + "<br><br>You need to buy " + parseInt(number_to_sell + number_to_keep) + " cards to brake even if you keep " + parseInt(number_to_keep) + " of them.<br><br>You need to sell " + parseInt(number_to_sell) + " cards to brake even.";
+  document.getElementById('result').innerHTML = result;
+}

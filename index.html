@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>SBC Break Even Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>SBC Break Even Calculator</h1>
+
+  <p>Enter the following information to calculate how many cards you need to buy:</p>
+
+  <label for="buy_price">Enter the price you can win bids for:</label><br>
+  <input type="number" id="buy_price"><br><br>
+
+  <label for="sell_price">Enter the price you can sell for within the hour:</label><br>
+  <input type="number" id="sell_price"><br><br>
+
+  <label for="number_to_keep">Enter how many cards do you need to keep for the SBC:</label><br>
+  <input type="number" id="number_to_keep"><br><br>
+
+  <button onclick="calculateProfit()">Calculate</button><br><br>
+
+  <p id="result"></p>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <p id="about">Made by izzie_izzie :-)</p>
+
+  <script>
+  function calculateProfit() {
+    // Get the buy price and sell price from the user
+    var buy_price = document.getElementById('buy_price').value;
+    var sell_price = document.getElementById('sell_price').value;
+    var number_to_keep = document.getElementById('number_to_keep').value;
+
+    // Calculate the profit per gold common
+    var profit_per_common = sell_price - buy_price;
+
+    var total_keep_price = number_to_keep * buy_price;
+    var total_sell_price = 0;
+
+    while (total_sell_price < total_keep_price) {
+      total_sell_price += profit_per_common;
+    }
+
+    var number_to_sell = total_sell_price / profit_per_common;
+    var total_number_to_buy = number_to_sell + number_to_keep * 1;
+
+    // Print the result
+    var result = "Profit per card: " + parseInt(profit_per_common) + "<br><br>Total sell price: " + parseInt(total_sell_price) + "<br><br>You need to buy " + total_number_to_buy + " cards to brake even if you keep " + parseInt(number_to_keep) + " of them.<br><br>You need to sell " + parseInt(number_to_sell) + " cards to brake even.";
+    document.getElementById('result').innerHTML = result;
+  }
+  </script>
+</body>
+</html>
